@@ -22,4 +22,13 @@ composer require "symbiote/silverstripe-elemental-listingpagelisting:dev-ss6"
 ## Configuration
 
 1. Install
-1. Add the following configuration:
+1. Add the following configuration to your project (some blocks might already be set, if so add the entry):
+
+```yml
+---
+Name: 'app-elemental'
+---
+Page:
+  allowed_elements:
+    - 'Symbiote\ListingPageElement\Model\ElementListingPageListing'
+```
