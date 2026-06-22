@@ -9,6 +9,8 @@ use SilverStripe\Security\Permission;
 use Symbiote\ListingPage\ListingPage;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Core\Validation\ValidationResult;
 
 class ElementListingPageListing extends BaseElement
 {
@@ -48,28 +50,23 @@ class ElementListingPageListing extends BaseElement
      * Generate the listing content.
      * {@link ListingPage->Content()} assumes the placeholder is in the $Content field,
      * so we need to temporarily replace the $Content value with the placeholder.
-     *
-     * @return HTMLText|null
      */
-    public function getListing()
+    public function getListing(): ?DBHTMLText
     {
         $page = $this->getPage();
         if (!$page || !($page instanceof \Symbiote\ListingPage\ListingPage)) {
-            return;
+            return null;
         }
 
         $oldContent = $page->Content;
         $page->Content = '$Listing';
-        $content = DBField::create_field('HTMLText', $page->Content());
+        $content = DBField::create_field(DBHTMLText::class, $page->Content());
         $page->Content = $oldContent;
 
-        return $content;
+        return $content instanceof DBHTMLText ? $content : null;
     }
 
-    /**
-     * @return ValidationResult
-     */
-    public function validate()
+    public function validate(): ValidationResult
     {
         $result = parent::validate();
         $page = $this->getPage();
