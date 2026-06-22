@@ -14,25 +14,26 @@ use SilverStripe\Core\Validation\ValidationResult;
 
 class ElementListingPageListing extends BaseElement
 {
-    private static $table_name = 'ElementListingPageListing';
+    private static string $table_name = 'ElementListingPageListing';
 
-    private static $singular_name = 'listing block';
+    private static string $singular_name = 'listing block';
 
-    private static $plural_name = 'listing blocks';
+    private static string $plural_name = 'listing blocks';
 
-    private static $description = 'Listing for a Listing Page';
+    private static string $class_description = 'Listing for a Listing Page';
 
-    private static $icon = 'font-icon-list';
+    private static string $icon = 'font-icon-list';
 
+    #[\Override]
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**
      * @return string
      */
+    #[\Override]
     public function getType()
     {
         return _t(self::class . '.BlockType', 'Listing Page listing');
@@ -41,6 +42,7 @@ class ElementListingPageListing extends BaseElement
     /**
      * @return string
      */
+    #[\Override]
     public function getSummary()
     {
         return '';
@@ -66,6 +68,7 @@ class ElementListingPageListing extends BaseElement
         return $content instanceof DBHTMLText ? $content : null;
     }
 
+    #[\Override]
     public function validate(): ValidationResult
     {
         $result = parent::validate();
@@ -78,6 +81,7 @@ class ElementListingPageListing extends BaseElement
         return $result;
     }
 
+    #[\Override]
     public function canCreate($member = null, $context = [])
     {
         if (!($controller = Controller::curr())
