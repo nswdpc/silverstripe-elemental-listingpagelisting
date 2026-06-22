@@ -1,0 +1,6 @@
+---
+Name: symbiote-listingpageelement
+---
+Symbiote\ListingPage\ListingPage:
+  allowed_elements:
+    - 'Symbiote\ListingPageElement\Model\ElementListingPageListing'

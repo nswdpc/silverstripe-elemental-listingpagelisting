@@ -79,18 +79,4 @@ class ElementListingPageListing extends BaseElement
         return $result;
     }
 
-    #[\Override]
-    public function canCreate($member = null, $context = [])
-    {
-        if (!($controller = Controller::curr())
-            || !$controller->hasMethod('currentPageID')
-            || !($id = $controller->currentPageID())
-            || !($page = SiteTree::get_by_id($id))
-            || !($page instanceof \Symbiote\ListingPage\ListingPage)
-        ) {
-            return false;
-        }
-
-        return parent::canCreate($member, $context);
-    }
 }
