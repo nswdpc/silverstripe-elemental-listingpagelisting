@@ -8,23 +8,41 @@
         "name": "Grant Heggie",
         "email": "grant@symbiote.com.au"
     }],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
-        "dnadesign/silverstripe-elemental": "^4 || ^5",
-        "symbiote/silverstripe-listingpage": "^2.4"
+        "dnadesign/silverstripe-elemental": "^6",
+        "symbiote/silverstripe-listingpage": "dev-ss6"
     },
+    "require-dev": {
+        "cambis/silverstripe-rector": "^2",
+        "cambis/silverstan": "^2",
+        "friendsofphp/php-cs-fixer": "^3",
+        "nswdpc/ci-files": "dev-v-4",
+        "phpunit/phpunit": "^11.5",
+        "phpstan/phpstan": "^2",
+        "phpstan/phpstan-phpunit": "^2",
+        "rector/rector": "^2",
+        "silverstripe/userforms": "^7.1"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/nswdpc/silverstripe-listingpage.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Symbiote\\Elemental\\": "src/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.1.x-dev"
-        }
+    "replace": {
+     	  "gheggie/silverstripe-elemental-listingpagelisting": "self.version"
     },
-	"replace": {
-		"gheggie/silverstripe-elemental-listingpagelisting": "self.version"
-	}
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true
+        }
+    }
 }
