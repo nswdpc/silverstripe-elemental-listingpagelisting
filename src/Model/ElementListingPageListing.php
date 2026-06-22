@@ -1,11 +1,9 @@
 <?php
 
-namespace Symbiote\Elemental\Model;
+namespace Symbiote\ListingPageElement\Model;
 
-use SilverStripe\CMS\Controllers\CMSMain;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
-use SilverStripe\Security\Permission;
 use Symbiote\ListingPage\ListingPage;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\ORM\FieldType\DBField;

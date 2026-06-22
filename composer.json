@@ -37,7 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Symbiote\\Elemental\\": "src/"
+            "Symbiote\\ListingPageElement\\": "src/"
         }
     },
     "replace": {
