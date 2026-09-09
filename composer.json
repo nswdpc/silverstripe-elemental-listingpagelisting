@@ -10,7 +10,7 @@
     }],
     "require": {
         "dnadesign/silverstripe-elemental": "^6",
-        "symbiote/silverstripe-listingpage": "dev-ss6"
+        "symbiote/silverstripe-listingpage": "dev-ss6 as 3.0.0"
     },
     "require-dev": {
         "cambis/silverstripe-rector": "^2",
