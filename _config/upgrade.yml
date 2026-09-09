@@ -1,0 +1,6 @@
+---
+Name: symbiote-listingpageelement-upgrade
+---
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    'Symbiote\Elemental\Model\ElementListingPageListing': 'Symbiote\ListingPageElement\Model\ElementListingPageListing'

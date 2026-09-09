@@ -1,36 +1,35 @@
 <?php
 
-namespace Symbiote\Elemental\Model;
+namespace Symbiote\ListingPageElement\Model;
 
-use SilverStripe\CMS\Controllers\CMSMain;
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Control\Controller;
-use SilverStripe\Security\Permission;
 use Symbiote\ListingPage\ListingPage;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Core\Validation\ValidationResult;
 
 class ElementListingPageListing extends BaseElement
 {
-    private static $table_name = 'ElementListingPageListing';
+    private static string $table_name = 'ElementListingPageListing';
 
-    private static $singular_name = 'listing block';
+    private static string $singular_name = 'listing block';
 
-    private static $plural_name = 'listing blocks';
+    private static string $plural_name = 'listing blocks';
 
-    private static $description = 'Listing for a Listing Page';
+    private static string $class_description = 'Listing for a Listing Page';
 
-    private static $icon = 'font-icon-list';
+    private static string $icon = 'font-icon-list';
 
+    #[\Override]
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**
      * @return string
      */
+    #[\Override]
     public function getType()
     {
         return _t(self::class . '.BlockType', 'Listing Page listing');
@@ -39,6 +38,7 @@ class ElementListingPageListing extends BaseElement
     /**
      * @return string
      */
+    #[\Override]
     public function getSummary()
     {
         return '';
@@ -48,28 +48,24 @@ class ElementListingPageListing extends BaseElement
      * Generate the listing content.
      * {@link ListingPage->Content()} assumes the placeholder is in the $Content field,
      * so we need to temporarily replace the $Content value with the placeholder.
-     *
-     * @return HTMLText|null
      */
-    public function getListing()
+    public function getListing(): ?DBHTMLText
     {
         $page = $this->getPage();
         if (!$page || !($page instanceof \Symbiote\ListingPage\ListingPage)) {
-            return;
+            return null;
         }
 
         $oldContent = $page->Content;
         $page->Content = '$Listing';
-        $content = DBField::create_field('HTMLText', $page->Content());
+        $content = DBField::create_field(DBHTMLText::class, $page->Content());
         $page->Content = $oldContent;
 
-        return $content;
+        return $content instanceof DBHTMLText ? $content : null;
     }
 
-    /**
-     * @return ValidationResult
-     */
-    public function validate()
+    #[\Override]
+    public function validate(): ValidationResult
     {
         $result = parent::validate();
         $page = $this->getPage();
@@ -81,17 +77,4 @@ class ElementListingPageListing extends BaseElement
         return $result;
     }
 
-    public function canCreate($member = null, $context = [])
-    {
-        if (!($controller = Controller::curr())
-            || !$controller->hasMethod('currentPageID')
-            || !($id = $controller->currentPageID())
-            || !($page = SiteTree::get_by_id($id))
-            || !($page instanceof \Symbiote\ListingPage\ListingPage)
-        ) {
-            return false;
-        }
-
-        return parent::canCreate($member, $context);
-    }
 }
