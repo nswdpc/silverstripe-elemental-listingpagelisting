@@ -2,8 +2,6 @@
 
 namespace Symbiote\ListingPageElement\Model;
 
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Control\Controller;
 use Symbiote\ListingPage\ListingPage;
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\ORM\FieldType\DBField;
